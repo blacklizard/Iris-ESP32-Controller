@@ -37,13 +37,17 @@ void handleLed()
   char body[length + 1];
   server.arg("colors").toCharArray(body, length + 1);
   char *chars_array = strtok(body, ":");
-  int led = 0;
+  int led = DIRECTION == RIGHT_TO_LEFT ? NUM_LEDS - 1 : 0;
   while (chars_array)
   {
     long color = strtol(chars_array, NULL, 16);
     leds[led] = color;
     chars_array = strtok(NULL, ":");
-    led++;
+    if(DIRECTION == RIGHT_TO_LEFT) {
+      led--;
+    } else {
+      led++;
+    }
   }
 
   delete[] chars_array;
