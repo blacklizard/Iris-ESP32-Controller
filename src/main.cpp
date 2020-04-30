@@ -8,23 +8,18 @@
 #include <WebServer.h>
 #include <ESPmDNS.h>
 
-#define LED_PIN 14
-#define NUM_LEDS 169
-#define BRIGHTNESS 90
-#define COLOR_ORDER GRB
-
 const char *ssid = WIFI_SSID;
 const char *password = WIFI_PASSWORD;
 
 WebServer server(8080);
 CRGB leds[NUM_LEDS];
 
-void handleSelect()
+void handleSelectSingleColor()
 {
   int length = server.arg("color").length();
   char body[length + 1];
   server.arg("color").toCharArray(body, length + 1);
-
+  long color = strtol(body, NULL, 16);
   for (int i = 0; i < NUM_LEDS; i++)
   {
     leds[i] = strtol(body, NULL, 16);
@@ -45,14 +40,15 @@ void handleLed()
   int led = 0;
   while (chars_array)
   {
-    long num = strtol(chars_array, NULL, 16);
-    leds[led] = num;
+    long color = strtol(chars_array, NULL, 16);
+    leds[led] = color;
     chars_array = strtok(NULL, ":");
     led++;
   }
 
   delete[] chars_array;
   FastLED.show();
+  server.sendHeader("Access-Control-Allow-Origin", "*");
   server.sendHeader("Connection", "close");
   server.send(200, "text/plain", "");
 }
@@ -80,7 +76,7 @@ void setup(void)
   Serial.println(WiFi.localIP());
 
   server.on("/", handleLed);
-  server.on("/select", handleSelect);
+  server.on("/select", handleSelectSingleColor);
   server.begin();
   Serial.println("HTTP server started");
 }
