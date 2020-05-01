@@ -25,7 +25,7 @@ void setup() {
  
   server.begin();
 
-  FastLED.addLeds<WS2812B, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( UncorrectedColor );
+  FastLED.addLeds<LED_CHIP, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( UncorrectedColor );
   FastLED.setBrightness(BRIGHTNESS);
 }
  
