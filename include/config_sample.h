@@ -1,15 +1,13 @@
-#ifndef WIFI_H
-#define WIFI_H
+#ifndef CONFIG_H
+#define CONFIG_H
 
 #define WIFI_SSID ""
 #define WIFI_PASSWORD ""
-#define LED_PIN 14
-#define NUM_LEDS 168
-#define BRIGHTNESS 90
-#define COLOR_ORDER GRB
 
-#define RIGHT_TO_LEFT 1
-#define LEFT_TO_RIGHT 2
-#define DIRECTION LEFT_TO_RIGHT
+#define LED_CHIP WS2812B
+#define COLOR_ORDER GRB 
+#define NUM_LEDS 337
+#define LED_PIN 14
+#define BRIGHTNESS 90
 
 #endif 
