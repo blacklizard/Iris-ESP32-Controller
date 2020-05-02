@@ -7,10 +7,8 @@ All notable changes to this project will be documented in this file.
 - LED data size reduced from 7 byte to 3 byte for each LED
 
 ## [0.0.2]
-### Added
 - Pre release
 
-## [0.0.1] - 2014-05-31
-### Added
+## [0.0.1]
 - Initial public availability 
 

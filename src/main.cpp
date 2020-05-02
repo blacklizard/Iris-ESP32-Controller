@@ -25,7 +25,7 @@ void setup() {
  
   server.begin();
 
-  FastLED.addLeds<LED_CHIP, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( UncorrectedColor );
+  FastLED.addLeds<LED_CHIP, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
   FastLED.setBrightness(BRIGHTNESS);
 }
  
@@ -34,7 +34,7 @@ void loop() {
   while (client.connected() && client.available())
   {
     client.read((uint8_t*)leds, NUM_LEDS*3);
+    delay(1);// needed to avoid random flickering of the LED strip
+    FastLED.show();
   }
-  delay(1);// needed to avoid random flickering of the LED strip
-  FastLED.show();
 }
